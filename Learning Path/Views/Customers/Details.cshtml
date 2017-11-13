@@ -9,3 +9,14 @@
 {
     <p>We don't have any customers yet.</p>
 }
+else
+{
+    <ul>
+        <li>Membership Type:@Model.MembershipType.Name</li>
+        @if (Model.Birthday.HasValue)
+        {
+            <li>Birthday:@Model.Birthday.Value.ToShortDateString()</li>
+        }
+    </ul>
+
+}

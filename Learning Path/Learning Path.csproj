@@ -195,6 +195,22 @@
     <Compile Include="Migrations\201711101850168_ApplyAnnotationsToCustomerName.Designer.cs">
       <DependentUpon>201711101850168_ApplyAnnotationsToCustomerName.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201711132153575_AddMembershipTypeName.cs" />
+    <Compile Include="Migrations\201711132153575_AddMembershipTypeName.Designer.cs">
+      <DependentUpon>201711132153575_AddMembershipTypeName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711132154470_UpdateNameMembershipType.cs" />
+    <Compile Include="Migrations\201711132154470_UpdateNameMembershipType.Designer.cs">
+      <DependentUpon>201711132154470_UpdateNameMembershipType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711132211408_AddCustomerBirthday.cs" />
+    <Compile Include="Migrations\201711132211408_AddCustomerBirthday.Designer.cs">
+      <DependentUpon>201711132211408_AddCustomerBirthday.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201711132213052_PopulateCustomerBirthday.cs" />
+    <Compile Include="Migrations\201711132213052_PopulateCustomerBirthday.Designer.cs">
+      <DependentUpon>201711132213052_PopulateCustomerBirthday.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -293,6 +309,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711101850168_ApplyAnnotationsToCustomerName.resx">
       <DependentUpon>201711101850168_ApplyAnnotationsToCustomerName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711132153575_AddMembershipTypeName.resx">
+      <DependentUpon>201711132153575_AddMembershipTypeName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711132154470_UpdateNameMembershipType.resx">
+      <DependentUpon>201711132154470_UpdateNameMembershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711132211408_AddCustomerBirthday.resx">
+      <DependentUpon>201711132211408_AddCustomerBirthday.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201711132213052_PopulateCustomerBirthday.resx">
+      <DependentUpon>201711132213052_PopulateCustomerBirthday.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

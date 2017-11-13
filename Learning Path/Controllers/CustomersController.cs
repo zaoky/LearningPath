@@ -30,7 +30,7 @@ namespace Learning_Path.Controllers
 
         public ActionResult Details(int id)
         {
-            Customer cust = this._context.Customers.FirstOrDefault(c => c.Id == id);
+            Customer cust = this._context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
             return View(cust ?? new Customer { Id = -1, Name = "Customers" });
         }
         #endregion
