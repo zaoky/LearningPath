@@ -3,6 +3,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web.Mvc;
 using Learning_Path.Models;
+using Learning_Path.ViewModels;
 
 namespace Learning_Path.Controllers
 {
@@ -33,6 +34,24 @@ namespace Learning_Path.Controllers
             Customer cust = this._context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
             return View(cust ?? new Customer { Id = -1, Name = "Customers" });
         }
+
+        [HttpPost]
+        public ActionResult Create(Customer customer)
+        {
+            _context.Customers.Add(customer);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
+        }
+
+        public ActionResult New()
+        {
+            List<MembershipType> membershipTypes = _context.MembershipTypes.ToList();
+            CustomerFormViewModel formViewModel = new CustomerFormViewModel
+            {
+                MembershipTypes = membershipTypes
+            };
+            return View("CustomerForm", formViewModel);
+        }
         #endregion
 
         #region Override
@@ -42,5 +61,16 @@ namespace Learning_Path.Controllers
             base.Dispose(disposing);
         }
         #endregion
+
+        public ActionResult Edit(int id)
+        {
+            Customer cust = this._context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
+            CustomerFormViewModel formViewModel = new CustomerFormViewModel
+            {
+                Customer = cust,
+                MembershipTypes = _context.MembershipTypes.ToList()
+        };
+            return cust == null ? (ActionResult) HttpNotFound() : View("CustomerForm", formViewModel);
+        }
     }
 }

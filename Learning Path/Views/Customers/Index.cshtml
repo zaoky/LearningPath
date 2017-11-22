@@ -18,7 +18,7 @@
     {
         <tr>
             <td>
-                @Html.ActionLink(cust.Name, "Details", "Customers", new {id = cust.Id}, null)
+                @Html.ActionLink(cust.Name, "Edit", "Customers", new {id = cust.Id}, null)
             </td>
             <td>@cust.MembershipType.Name</td>
         </tr>
