@@ -1,0 +1,26 @@
+﻿@using Learning_Path.Models
+@model List<Customer>
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Customer</h2>
+
+<table class="table table=bordered table-hover">
+    <thead>
+        <tr>
+            <th>Customer</th>
+            <th>Membership Type</th>
+        </tr>
+    </thead>
+    @foreach (Customer cust in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(cust.Name, "Edit", "Customers", new {id = cust.Id}, null)
+            </td>
+            <td>@cust.MembershipType.Name</td>
+        </tr>
+    }
+</table>
