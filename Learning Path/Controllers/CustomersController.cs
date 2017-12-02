@@ -36,11 +36,42 @@ namespace Learning_Path.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if (!ModelState.IsValid)
+            {
+                CustomerFormViewModel viewModel = new CustomerFormViewModel
+                {
+                    Customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+                return View("CustomerForm", viewModel);
+            }
+            if (customer.Id == 0)
+            {
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                Customer customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+                customerInDb.Name = customer.Name;
+                customerInDb.Birthday = customer.Birthday;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsletter = customer.IsSubscribedToNewsletter;
+            }
             _context.SaveChanges();
             return RedirectToAction("Index", "Customers");
+        }
+
+        public ActionResult Edit(int id)
+        {
+            Customer cust = this._context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
+            CustomerFormViewModel formViewModel = new CustomerFormViewModel
+            {
+                Customer = cust,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+            return cust == null ? (ActionResult)HttpNotFound() : View("CustomerForm", formViewModel);
         }
 
         public ActionResult New()
@@ -62,15 +93,6 @@ namespace Learning_Path.Controllers
         }
         #endregion
 
-        public ActionResult Edit(int id)
-        {
-            Customer cust = this._context.Customers.Include(c => c.MembershipType).FirstOrDefault(c => c.Id == id);
-            CustomerFormViewModel formViewModel = new CustomerFormViewModel
-            {
-                Customer = cust,
-                MembershipTypes = _context.MembershipTypes.ToList()
-        };
-            return cust == null ? (ActionResult) HttpNotFound() : View("CustomerForm", formViewModel);
-        }
+      
     }
 }
