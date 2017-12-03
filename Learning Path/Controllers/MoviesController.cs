@@ -5,6 +5,7 @@ using System.Data.Entity;
 using Learning_Path.Models;
 using System;
 using Learning_Path.ViewModels;
+using System.Globalization;
 
 namespace Learning_Path.Controllers
 {
@@ -33,13 +34,21 @@ namespace Learning_Path.Controllers
         public ActionResult FormMovie(int id)
         {
             Movie mov = this._context.Movies.Include(c => c.Genre).FirstOrDefault(m => m.Id == id);
-
-            MovieFormViewModel movieFormViewModel = new MovieFormViewModel
+            MovieFormViewModel movieFormViewModel;
+            if (mov == null)
             {
-                Genres = _context.Genres.ToList(),
-                Movie = mov ?? new Movie()
-            };
-
+                movieFormViewModel = new MovieFormViewModel()
+                {
+                    Genres = _context.Genres.ToList(),
+                };
+            }
+            else
+            {
+                movieFormViewModel = new MovieFormViewModel(mov)
+                {
+                    Genres = _context.Genres.ToList(),
+                };
+            }
             return View("MovieForm", movieFormViewModel);
         }
 
@@ -50,8 +59,17 @@ namespace Learning_Path.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] // to avoid cross site request forgery
         public ActionResult Save(Movie movie)
         {
+            if (!ModelState.IsValid)
+            {
+                MovieFormViewModel viewModel = new MovieFormViewModel(movie)
+                {
+                    Genres = _context.Genres.ToList()
+                };
+                return View("MovieForm", viewModel);
+            }
             if (movie.Id == 0)
             {
                 movie.DateAdded = DateTime.Now;

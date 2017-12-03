@@ -36,6 +36,7 @@ namespace Learning_Path.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken] // to avoid cross site request forgery
         public ActionResult Save(Customer customer)
         {
             if (!ModelState.IsValid)
@@ -79,7 +80,8 @@ namespace Learning_Path.Controllers
             List<MembershipType> membershipTypes = _context.MembershipTypes.ToList();
             CustomerFormViewModel formViewModel = new CustomerFormViewModel
             {
-                MembershipTypes = membershipTypes
+                MembershipTypes = membershipTypes,
+                Customer = new Customer ()
             };
             return View("CustomerForm", formViewModel);
         }

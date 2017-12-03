@@ -223,6 +223,10 @@
     <Compile Include="Migrations\201711201955456_PopulateMovies.Designer.cs">
       <DependentUpon>201711201955456_PopulateMovies.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201712032120235_AddRequiredNameAttr.cs" />
+    <Compile Include="Migrations\201712032120235_AddRequiredNameAttr.Designer.cs">
+      <DependentUpon>201712032120235_AddRequiredNameAttr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -230,6 +234,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
+    <Compile Include="Models\Min18YerasIfAMember.cs" />
     <Compile Include="Models\Movie.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -348,6 +353,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201711201955456_PopulateMovies.resx">
       <DependentUpon>201711201955456_PopulateMovies.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201712032120235_AddRequiredNameAttr.resx">
+      <DependentUpon>201712032120235_AddRequiredNameAttr.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
